@@ -1,5 +1,6 @@
 var randomstring = require("randomstring");
 var ArrayList = require('Arraylist');
+var Body = require('../environment/Body.js');
 
 
 var Agent = function(body, radius) {
@@ -24,6 +25,12 @@ Agent.prototype.setPerciveObject = function(perciveObject) {
 
 
 Agent.prototype.setBody = function(body) {
+	return this._radiusFustrum;
+};
+
+
+
+method.setBody = function(body) {
      this._body = body;
 };
 
@@ -37,6 +44,7 @@ Agent.prototype.start= function(){
 
 Agent.prototype.doDecisionAndAction = function() {
     console.log('agent');
+
 };
 
 module.exports = Agent;

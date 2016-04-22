@@ -18,12 +18,16 @@ var PreyAgent = function(body, radius){
      
 };
 
-
-
+ 
+function preyAgent(body, radius){
+	Agent.call(this, body, radius);
+	//if(body==null)
+	//	this.createDefaultBody();
+}
+ 
 inherits(PreyAgent,Agent); // B now inherits/extends A
 
 PreyAgent.prototype.createDefaultBody= function(){
-
 };
 
 PreyAgent.prototype.doDecisionAndAction = function() { // override A's method
