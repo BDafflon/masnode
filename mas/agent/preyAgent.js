@@ -1,44 +1,39 @@
+
 var Agent = require("./Agent.js");
 
-
-function inheritPrototype(childObject, parentObject) {
-    var copyOfParent = Object.create(parentObject.prototype)
-    copyOfParent.constructor = childObject
-    childObject.prototype = copyOfParent
-}
-
-
-var method = preyAgent.prototype;
-
-function preyAgent(body, radius){
-	Agent.call(this, body, radius);
-	if(body==null)
-		this.createDefaultBody();
-}
-
-
-method.createDefaultBody= function(){
-
+var inherits = function(ctor, superCtor) { // took this right from requrie('util').inherits
+  ctor.super_ = superCtor;
+  ctor.prototype = Object.create(superCtor.prototype, {
+    constructor: {
+      value: ctor,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
 };
 
-method.setBody = function(body) {
-     this._body = body;
-};
-
-method.setRadius= function(radius){
-	this._radiusFustrum = radius;
-};
-
-method.start= function(){
-
-}
-
-method.doDecisionAndAction= function(){
-	console.log("prey");
+var PreyAgent = function(body, radius){
+    PreyAgent.super_.call(this); // call A's constructor
+     
 };
 
 
 
-inheritPrototype(preyAgent, Agent);
+inherits(PreyAgent,Agent); // B now inherits/extends A
 
-module.exports = preyAgent;
+PreyAgent.prototype.createDefaultBody= function(){
+
+};
+
+PreyAgent.prototype.doDecisionAndAction = function() { // override A's method
+    
+    console.log('prey');
+};
+
+PreyAgent.prototype.uniqueB = function() {
+    console.log('B.uniqueB',this.name);
+};
+
+
+module.exports = PreyAgent;

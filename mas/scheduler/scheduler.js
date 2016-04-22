@@ -33,12 +33,12 @@ method.run = function(){
 
 		
 		console.log(agents.get(i).getName());
-
-		agents.get(i).setPerciveObject(this._worldModel.perceive(agents.get(i)));
-		this._worldModel.getInfluences().add(a.doDecisionAndAction());
+		agents.get(i).doDecisionAndAction();
+		//agents.get(i).setPerciveObject(this._worldModel.perceive(agents.get(i)));
+		//this._worldModel.getInfluences().add(agents.get(i).doDecisionAndAction());
 	}
 
-	this._worldModel.applyInfluences(this._simulationTime.getTic);
+	//this._worldModel.applyInfluences(this._simulationTime.getTic);
 }
 
 module.exports = Scheduler;

@@ -1,6 +1,8 @@
 
 var WorldModel = require('./environment/WorldModel.js');
+var Agent = require('./agent/Agent.js');
 var Prey = require('./agent/PreyAgent.js');
+
 var Scheduler = require('./scheduler/Scheduler.js');
 var typeOf = require('typeof');
 
@@ -17,12 +19,13 @@ function Simulation() {
 
 	for(var i=0 ; i<10;i++){
 
-		var prey1 = new Prey(null,10);
-		
-		this._worldModel.onAgentAdded(prey1);
+		var a = new Prey(null,10);
+		 a.doDecisionAndAction();
+		this._worldModel.onAgentAdded(a);
+
 	} 
 
-	this._scheduler.start();
+	//this._scheduler.start();
 
 
 }

@@ -12,7 +12,4 @@ server.listen(8080);
 app.use(express.static(__dirname + '/public'));
 console.log("Server running on 127.0.0.1:8080");
 
-// array of all lines drawn
-var line_history = [];
-
 var simu = new SimulationSMA();

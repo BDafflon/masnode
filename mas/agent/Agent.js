@@ -1,49 +1,42 @@
 var randomstring = require("randomstring");
 var ArrayList = require('Arraylist');
 
-var method = Agent.prototype;
 
+var Agent = function(body, radius) {
+    
+     this._body = body;
+     this._radius = radius;
+     this._id=randomstring.generate(20);
+     this._perciveObject = ArrayList;
+};
 
-function Agent(body, radius) {
-    this._body = body;
-    this._radiusFustrum = radius;
-    this._id = randomstring.generate(20);
-    this._perciveObject = ArrayList;
-}
+Agent.prototype.createDefaultBody= function(){
 
-method.getName = function(){
+};
+
+Agent.prototype.getName = function(){
 	return this._id;
 }
-method.setPerciveObject = function(perciveObject) {
+Agent.prototype.setPerciveObject = function(perciveObject) {
    	this._perciveObject = perciveObject;
 };
 
-method.getBody = function() {
-    return this._body;
-};
 
-method.getRadius= function(){
-	return this._radiusFustrum;
-};
 
-method.createDefaultBody= function(){
-
-};
-
-method.setBody = function(body) {
+Agent.prototype.setBody = function(body) {
      this._body = body;
 };
 
-method.setRadius= function(radius){
+Agent.prototype.setRadius= function(radius){
 	this._radiusFustrum = radius;
 };
 
-method.start= function(){
+Agent.prototype.start= function(){
 
 }
 
-method.doDecisionAndAction = function(){
-
+Agent.prototype.doDecisionAndAction = function() {
+    console.log('agent');
 };
 
 module.exports = Agent;

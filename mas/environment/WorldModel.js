@@ -1,6 +1,6 @@
 
 var ArrayList = require('Arraylist');
-var PerceptionData = require('PerceptionData.js');
+var PerceptionData = require('./PerceptionData.js');
 var Vector2D = require('../../utils/geometry/Vector2D.js');
 var AnimatAction = require('./AnimatAction.js');
 
