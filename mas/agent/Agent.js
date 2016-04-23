@@ -30,7 +30,7 @@ Agent.prototype.setBody = function(body) {
 
 
 
-method.setBody = function(body) {
+Agent.prototype.setBody = function(body) {
      this._body = body;
 };
 

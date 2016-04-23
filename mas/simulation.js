@@ -29,7 +29,7 @@ function Simulation() {
  
 	} 
 
-	//this._scheduler.start();
+	this._scheduler.start();
 
 
 }
