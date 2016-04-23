@@ -36,22 +36,22 @@ method.length = function(){
 	return Math.sqrt((this._x*this._x)+(this._y*this._y));
 }
 
-method.normalize = function(){
+method.normalize2D = function(){
 	var length = this.length();
 
 	if (length == 0) {
 		this._x = 1;
 		this._y = 0;
 	} else {
-		this.divide(Vector2D(length, length));
+		this.divide(new Vector2D(length, length));
 	}
 	return this;
 }
 
 
-method.divide = function(){
-	this._x /= vector._x;
-	this._y /= vector._y;
+method.divide = function(vector){
+	this._x /= vector.getX();
+	this._y /= vector.getY();
 	return this;
 }
 
@@ -61,8 +61,8 @@ method.add = function(vector1){
 }
 
 method.scale= function(scalar){
-	this._x*=scalar;
-	this._y*=scalar;
+	this._x=this._x*scalar;
+	this._y=this._y*scalar;
 }
 
 

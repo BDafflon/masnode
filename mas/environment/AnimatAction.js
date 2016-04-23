@@ -14,7 +14,7 @@ method.getTranslation = function(){
 }
 
 method.getRotation = function(){
-	return this.rotation;
+	return this._rotation;
 }
 
 method.getObjectToMove = function(){

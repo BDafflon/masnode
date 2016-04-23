@@ -8,23 +8,23 @@ function Body(mass, speed, acceleration, rotation, location, type) {
     this._MaxSpeed = speed;
     this._MaxAcceleration = acceleration;
     this._location = location
-    
+
     this._PerceptionType = type;
 
     this._orientation = 0.;
     this._linearMove = new Vector2D;
     this.__currentAngularSpeed = 0.;
-    this._maxAngularSpeed=1;
+    this._maxAngularSpeed = 1;
 
-    console.log("Body "+this._PerceptionType)
-}
+    console.log("Body " + this._PerceptionType)
+};
 
 
 // GETTER
 
-method.getPerceptionType = function(){
-	return this._PerceptionType;
-}
+method.getPerceptionType = function() {
+    return this._PerceptionType;
+};
 
 method.getLocation = function() {
     return this._location;
@@ -48,7 +48,7 @@ method.setLocation = function(location) {
 };
 
 method.setMass = function(mass) {
-   this._mass = mass;
+    this._mass = mass;
 };
 
 method.setMaxAcceleration = function(acceleration) {
@@ -60,58 +60,68 @@ method.setMaxSpeed = function(speed) {
 };
 
 method.scaleVector = function(vector, length, tic) {
-        var v2 = new Vector2D;
-        v2.copy(vector);
 
+   
 
-        if (v2.length()>0) v2.normalize();
+    var v2 = new Vector2D;
+    v2.copy(vector);
 
-        v2.scale(tic); //TODO checl  -> v2.scale(clock.perTimeUnit(length));
-
-        return v2;
+ 
+    if (v2.length() > 0) {
+        v2.normalize2D();
     }
 
-method.computeSteeringMove = function(influence, tic){
-        var m = new Vector2d;
-        
-        m.copy(this._linearMove);
-        m.add(linearAcceleration);
-        
-        var lSpeed = m.length();
+     v2.scale((length*tic) / 1000.); //TODO checl  -> v2.scale(clock.perTimeUnit(length));
 
-        if (lSpeed<0) lSpeed = 0.;
-        if (lSpeed>this._maxLinearSpeed) lSpeed = this._maxLinearSpeed;
+     
+     return v2;
+};
 
-        return this.scaleVector(m, lSpeed, clock);
-}
 
-method.computeSteeringRotation = function(influence, tic){
 
-        var speed = this._currentAngularSpeed + tic ; //TODO ->clock.perTimeUnit(angularAcceleration);
-        if (speed<-this._maxAngularSpeed) speed = -this._maxAngularSpeed;
-        else if (speed>this._maxAngularSpeed) speed = this._maxAngularSpeed;
+method.computeKinematicMove = function(influence, tic) {
 
-        return tic; //T0D0 -> clock.perTimeUnit(speed);
-}
+    var lSpeed = influence.getLinear().length();
 
-method.move = function(vector, tic){
-    if (tic>0) {
-            this._linearMove.set(vector.getX(), vector.getY());
-            var distance = this.linearMove.length();
+   
+    if (lSpeed < 0) lSpeed = 0.;
+    if (lSpeed > this._MaxSpeed) lSpeed = this._MaxSpeed;
 
-            if (distance>0) {
-                this._linearMove.normalize();
-                this._linearMove.scale(distance/tic);
-            }
+     
+
+    return this.scaleVector(influence.getLinear(), lSpeed, tic);
+};
+
+method.computeKinematicRotation = function(influence, tic) {
+
+    var speed = influence.getAngular();
+    if (speed < -this._maxAngularSpeed) speed = -this._maxAngularSpeed;
+    else if (speed > this._maxAngularSpeed) speed = this._maxAngularSpeed;
+
+
+
+
+    return speed * (tic ); //T0D0 -> clock.perTimeUnit(speed);
+};
+
+method.move = function(vector, tic) {
+    if (tic > 0) {
+        this._linearMove.set(vector.getX(), vector.getY());
+        var distance = this._linearMove.length();
+
+        if (distance > 0) {
+            this._linearMove.normalize2D();
+            this._linearMove.scale(distance / tic);
         }
-        else {
-            this.linearMove.set(0,0);
-        }
-        this._location.setX(this._location.getX()+vector.getX());
-        this._location.setY(this._location.getY()+vector.getY());
-}
+    } else {
+        this._linearMove.set(0, 0);
+    }
+    this._location.setX(this._location.getX() + vector.getX());
+    this._location.setY(this._location.getY() + vector.getY());
+};
 
-method.rotate = function(angle, tic){
+method.rotate = function(angle, tic) {
     this.orientation += angle;
-}
+};
+
 module.exports = Body;
