@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
    for(var i = 0 ; i < data.length; i++){
 
    		 
-   		var d = {x:data.get(i).getLocation().getX(), y:data.get(i).getLocation().getY(), type:data.get(i).getType()}
+   		var d = {id:data.get(i).getId(), x:data.get(i).getLocation().getX(), y:data.get(i).getLocation().getY(), type:data.get(i).getType()}
    		
    		io.emit('draw_agent', {agent: d});
  		

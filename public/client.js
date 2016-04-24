@@ -1,81 +1,87 @@
+
+var agents= {};
+var agents2={};
+
 document.addEventListener("DOMContentLoaded", function() {
- var mouse = { 
-  click: false,
-  move: false,
-  pos: {x:0, y:0},
-  pos_prev: false
-};
+ 
    // get canvas element and create context
    var canvas  = document.getElementById('drawing');
    var context = canvas.getContext('2d');
    var width   = window.innerWidth;
    var height  = window.innerHeight;
    var socket  = io.connect();
-
-   // set canvas to full browser width/height
-   canvas.width = width;
-   canvas.height = height;
-
-    
-
-   // draw line received from server
-   socket.on('draw_line', function (data) {
-    var line = data.line;
-    context.beginPath();
-    context.moveTo(line[0].x * width, line[0].y * height);
-    context.lineTo(line[1].x * width, line[1].y * height);
-    context.stroke();
-  });
+   var canvasWidth = 800;
+   var canvasHeight = 800;
    
-   socket.on('clean', function(){
+   // var agents= {1:{x:1,y:2,t:4}};
+   
 
-     
-
-     
-    context.clearRect(0, 0, 1000, 1000);
-  });
-
-
+   var update =0;
+   // set canvas to full browser width/height
+   
    socket.on('draw_agent', function (data) {
 
+    id = data.agent.id;
 
-   	context.beginPath();
-
-    centerX =data.agent.x + 250;
-    centerY =data.agent.y + 250;
-    console.log(centerX+" : "+centerY);
-    
-
+    x =data.agent.x ;
+    y =data.agent.y ;
+    console.log(x);
     type = data.agent.type;
 
-    var theta = 0;
-    var x = 0;
-    var y = 0;
-    var radius = 5;
-    
-    
-    context.beginPath();
+    var d={x:x,y:y,t:type};
+    if(agents[id] ==undefined){
+      agents2[id]=d;
+      agents[id]=d;
 
-    if( type == "prey")
-      context.strokeStyle = '#7bee8e';
-    else if( type == "predator")
-      context.strokeStyle = '#820a1e';
-    else
-      context.strokeStyle = '#8b8682';        
-
-    context.stroke();
-
-    for (var i = 0; i < 10; i++) {
-      theta = (i / 10) * 2 * 3.14;
-      x = centerX + radius * Math.sin(theta);
-      y = centerY + radius * Math.cos(theta);
-      context.lineTo(x, y);
+    }else{
+      agents2[id]=agents[id];
+      agents[id]=d;
     }
-    
-    
-    
-    context.stroke();
+    update = 1;
+
   });
-   
-   
- });
+
+ 
+var requestAnimationFrame = window.requestAnimationFrame || 
+                            window.mozRequestAnimationFrame || 
+                            window.webkitRequestAnimationFrame || 
+                            window.msRequestAnimationFrame;
+                            
+function init(){
+  window.requestAnimationFrame(draw);
+}
+
+function draw() {
+   context.clearRect(0, 0, canvasWidth, canvasHeight);
+// color in the background
+    context.fillStyle = "#EEEEEE";
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+
+
+  for(var agent  in agents){
+  drawAgent(agents[agent]);
+ }
+  context.stroke();
+  
+  window.requestAnimationFrame(draw);
+}
+
+function drawAgent(agent){
+     
+    // draw the circle
+    context.beginPath();
+     
+    var radius = 5;
+    context.arc(agent['x'], agent['y'], radius, 0, Math.PI * 2, false);
+    context.closePath();
+     
+    // color in the circle
+    if(agent['t']=="prey")
+      context.fillStyle = "#00CC00";
+    if(agent['t']=="predator")
+      context.fillStyle = "#CC0000";
+    context.fill();
+}
+
+init();
+});

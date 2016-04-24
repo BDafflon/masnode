@@ -21,11 +21,16 @@ var line_history = [];
 io.on('connection', function (socket) {
 
   setInterval(function(){
-  data = {x:Math.random() * (500 - 1) + 1, y:Math.random() * (500 - 1) + 1 };
+  data = {id:1,x:Math.random() * (200 - 1) + 1, y:Math.random() * (200 - 1) + 1 };
  
- 	io.emit('draw_circle', {circle: data});
+ 	io.emit('draw_circle', {agent: data});
+
+ 	 data = {id:2,x:Math.random() * (200 - 1) + 1, y:Math.random() * (200 - 1) + 1 };
+ 
+ 	io.emit('draw_circle', {agent: data});
  	console.log('draw_circle');
-}, 100);
+ 	
+}, 500);
 
    
    

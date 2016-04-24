@@ -64,7 +64,7 @@ method.perceive= function(agent){
 				);
 
 			if(distance<currentAgent.getRadius()){
-				var perception = new PerceptionData(location, type);
+				var perception = new PerceptionData(location, type,null);
 				perceptionList.add(perception);
 			}
 			
@@ -140,7 +140,7 @@ method.getStat= function(){
 
 		var type = this._agents.get(j).getBody().getPerceptionType();
 
-		var perception = new PerceptionData(location, type);
+		var perception = new PerceptionData(location, type, this._agents.get(j).getName());
 		data.add(perception);
 	}
 
