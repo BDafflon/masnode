@@ -6,7 +6,12 @@ function Agent(body, radius) {
     this._body = body;
     this._radiusFustrum = radius;
     this.id = randomstring.generate(20);
+    thiz._perciveObject = ArrayList;
 }
+
+method.setPerciveObject = function(perciveObject) {
+   	this._perciveObject = perciveObject;
+};
 
 method.getBody = function() {
     return this._body;

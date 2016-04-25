@@ -12,27 +12,35 @@ function WorldModel(width,height) {
     
 }
 
-method.onAgentBodyAdded = function(body){
+method.getInfluences = function(){
+	return this._influences;
+}
+method.getAgent = function(){
+	return this._agents;
+}
+
+method.onAgentAdded = function(agent){
+	this._agents.add(agent)
+};
+
+method.onAgentRemoved = function(agent){
 
 };
 
-method.onAgentBodyRemoved = function(body){
+method.onObjectAdded = function(object){
 
 };
 
-method.onObjectAdded = function(body){
+method.onObjectRemoved = function(object){
 
 };
 
-method.onObjectRemoved = function(body){
+method.perceive= function(agent){
 
 };
 
-method.perceive= function(agentId){
 
-};
-
-method.applyInfluences(){
+method.applyInfluences= function(){
 
 }
 
