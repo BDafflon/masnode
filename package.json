@@ -1,0 +1,17 @@
+{
+  "name": "masnode",
+  "version": "0.0.1",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "2.4.1",
+    "express": "4.13.3"
+  },
+  "license": "MIT"
+}
