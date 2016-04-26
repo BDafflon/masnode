@@ -27,6 +27,11 @@ method.set = function(x,y){
 	this._y=y;
 }
 
+method.copy = function(vector1){
+	this._x=vector1.getX();
+	this._y= vector1.getY();
+}
+
 method.length = function(){
 	return Math.sqrt((this._x*this._x)+(this._y*this._y));
 }
@@ -48,6 +53,16 @@ method.divide = function(){
 	this._x /= vector._x;
 	this._y /= vector._y;
 	return this;
+}
+
+method.add = function(vector1){
+	this._x+=vector1.getX();
+	this._y+= vector1.getY();
+}
+
+method.scale= function(scalar){
+	this._x*=scalar;
+	this._y*=scalar;
 }
 
 
