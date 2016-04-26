@@ -1,6 +1,8 @@
 
 var typeOf = require('typeof');
 var ArrayList = require('Arraylist');
+var AnimatInfluence = require('../environment/AnimatInfluence.js');
+var PreyAgent = require('../agent/PreyAgent.js');
 
 var method = Scheduler.prototype;
 
@@ -32,10 +34,20 @@ method.run = function(){
 	for(var i = 0 ; i <  agents.length; i++){
 
 		
-		console.log(agents.get(i).getName());
+		 
 
-		agents.get(i).setPerciveObject(this._worldModel.perceive(agents.get(i)));
-		this._worldModel.getInfluences().add(a.doDecisionAndAction());
+
+		console.log(typeOf(agents.get(i)));
+		var prey = new PreyAgent(agents.get(i));
+		console.log(typeOf(prey));
+
+		//agents.get(i).setPerciveObject(this._worldModel.perceive(agents.get(i)));
+
+		var influence = prey.doDecisionAndAction();
+
+		console.log("influence");
+		console.log(influence);
+		this._worldModel.getInfluences().add(influence);
 	}
 
 	this._worldModel.applyInfluences(this._simulationTime.getTic);

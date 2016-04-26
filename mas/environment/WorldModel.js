@@ -1,8 +1,10 @@
 
 var ArrayList = require('Arraylist');
-var PerceptionData = require('PerceptionData.js');
+var PerceptionData = require('./PerceptionData.js');
 var Vector2D = require('../../utils/geometry/Vector2D.js');
 var AnimatAction = require('./AnimatAction.js');
+var typeOf = require('typeof');
+
 
 var method = WorldModel.prototype;
 
@@ -29,6 +31,8 @@ method.onAgentAdded = function(agent){
 	this._agents.add(agent)
 };
 
+
+
 method.onAgentRemoved = function(agent){
 
 };
@@ -44,14 +48,14 @@ method.onObjectRemoved = function(object){
 method.perceive= function(agent){
 
 	var currentAgent = agent;
-	var perceptionList = new Arraylist;
+	var perceptionList = new ArrayList;
 
 	for (var j = 0; j < this._agents.length; j++) {
-		if(i!=j){
-			var currentLocation = this._agents.get(i).getBody().getLocation();
+		if(this._agents.get(j).getName()!=agent.getName()){
+			var currentLocation = agent.getBody().getLocation();
 
 			var location = this._agents.get(j).getBody().getLocation();
-			var type = this._agents.get(j).getBody().getType();
+			var type = this._agents.get(j).getBody().getPerceptionType();
 
 			var distance = Math.sqrt(  (location.getX() - currentLocation.getX())*(location.getX() - currentLocation.getX()) +
 				(location.getY() - currentLocation.getY())*(location.getY() - currentLocation.getY())
@@ -70,13 +74,14 @@ method.perceive= function(agent){
 
 
 method.applyInfluences= function(tic){
-	var influenceList = new Arraylist;
-	var action = new Arraylist;
+	var influenceList = new ArrayList;
+	var action = new ArrayList;
 
-	influenceList.add(this._influences);
+	 
 
-	for(var i=0 ;i<influenceList.length; i++){
-		var currentInfluence = influenceList.get(i);
+	for(var i=0 ;i<this._influences.length; i++){
+		var currentInfluence = this._influences.get(i);
+		console.log(currentInfluence);
 		var body = currentInfluence.getBody();
 
 		if(body != null){

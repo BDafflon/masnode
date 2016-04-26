@@ -3,7 +3,7 @@ var method = Body.prototype;
 
 
 // Constructeur
-function Body(mass, speed, acceleration, location, type) {
+function Body(mass, speed, acceleration, rotation, location, type) {
     this._mass = mass;
     this._MaxSpeed = speed;
     this._MaxAcceleration = acceleration;
@@ -14,7 +14,9 @@ function Body(mass, speed, acceleration, location, type) {
     this._orientation = 0.;
     this._linearMove = new Vector2D;
     this.__currentAngularSpeed = 0.;
-    this._maxAngularSpeed=0.;
+    this._maxAngularSpeed=1;
+
+    console.log("Body "+this._PerceptionType)
 }
 
 
@@ -58,7 +60,7 @@ method.setMaxSpeed = function(speed) {
 };
 
 method.scaleVector = function(vector, length, tic) {
-        Vector2D v2 = new Vector2D;
+        var v2 = new Vector2D;
         v2.copy(vector);
 
 
@@ -75,12 +77,12 @@ method.computeSteeringMove = function(influence, tic){
         m.copy(this._linearMove);
         m.add(linearAcceleration);
         
-        double lSpeed = m.length();
+        var lSpeed = m.length();
 
         if (lSpeed<0) lSpeed = 0.;
         if (lSpeed>this._maxLinearSpeed) lSpeed = this._maxLinearSpeed;
 
-        return.this.scaleVector(m, lSpeed, clock);
+        return this.scaleVector(m, lSpeed, clock);
 }
 
 method.computeSteeringRotation = function(influence, tic){

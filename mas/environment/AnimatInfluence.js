@@ -17,7 +17,7 @@ method.getAngular = function(){
 	return this._angular;
 }
 
-method.getBody=fuction(){
+method.getBody =function(){
 	return this._body;
 }
 

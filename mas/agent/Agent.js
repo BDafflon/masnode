@@ -1,5 +1,6 @@
 var randomstring = require("randomstring");
 var ArrayList = require('Arraylist');
+var Body = require('../environment/Body.js');
 
 var method = Agent.prototype;
 
@@ -26,9 +27,7 @@ method.getRadius= function(){
 	return this._radiusFustrum;
 };
 
-method.createDefaultBody= function(){
 
-};
 
 method.setBody = function(body) {
      this._body = body;
@@ -43,7 +42,7 @@ method.start= function(){
 }
 
 method.doDecisionAndAction = function(){
-
+console.log("agent");
 };
 
 module.exports = Agent;
