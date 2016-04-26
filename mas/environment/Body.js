@@ -3,13 +3,13 @@ var method = Body.prototype;
 
 
 // Constructeur
-function Body(mass, speed, acceleration, location) {
+function Body(mass, speed, acceleration, location, type) {
     this._mass = mass;
     this._MaxSpeed = speed;
     this._MaxAcceleration = acceleration;
     this._location = location
     
-    this._PerceptionType = "AgentBody";
+    this._PerceptionType = type;
 }
 
 

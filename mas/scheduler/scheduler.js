@@ -1,13 +1,23 @@
 
+var typeOf = require('typeof');
+var ArrayList = require('Arraylist');
 
 var method = Scheduler.prototype;
 
 
-function Scheduler(worldModel) {
+function Scheduler(worldModel, simulationTime) {
 	this._worldModel = worldModel;
+	this._simulationTime = simulationTime;
 }
 
 method.start = function(){
+	var self = this;
+
+	setInterval(function(){
+		self.run();
+
+
+	}, this._simulationTime.getTic);
 
 }
 
@@ -16,10 +26,16 @@ method.stop = function(){
 }
 
 method.run = function(){
-	agents = this._worldModel.getAgents();
-	for(var a in agents){
-		a.setPerciveObject(this._worldModel.perceive(a));
-		this._worldModel.getInfluences().add(a.doDecisionAndAction());
+
+	var agents =  this._worldModel.getAgents();
+
+	for(var i = 0 ; i <  agents.length; i++){
+
+		
+		console.log(agents.get(i).getName());
+
+		agents.get(i).setPerciveObject(this._worldModel.perceive(agents.get(i)));
+		//this._worldModel.getInfluences().add(a.doDecisionAndAction());
 	}
 
 	this._worldModel.applyInfluences();

@@ -3,6 +3,7 @@ var express = require('express'),
     http = require('http'),
     socketIo = require('socket.io');
 
+var SimulationSMA = require('./mas/Simulation.js');
 // start webserver on port 8080
 var server =  http.createServer(app);
 var io = socketIo.listen(server);
@@ -14,19 +15,4 @@ console.log("Server running on 127.0.0.1:8080");
 // array of all lines drawn
 var line_history = [];
 
-
-
-
-// event-handler for new incoming connections
-io.on('connection', function (socket) {
-
-  setInterval(function(){
-  data = {x:Math.random() * (500 - 1) + 1, y:Math.random() * (500 - 1) + 1 };
- 
- 	io.emit('draw_circle', {circle: data});
- 	console.log('draw_circle');
-}, 100);
-
-   
-   
-});
+var simu = new SimulationSMA();

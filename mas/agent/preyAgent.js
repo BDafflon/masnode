@@ -17,7 +17,7 @@ function preyAgent(body, radius){
 }
 
 
-method.createDefaultBody(){
+method.createDefaultBody= function(){
 
 };
 
@@ -25,15 +25,15 @@ method.setBody = function(body) {
      this._body = body;
 };
 
-method.setRadius(radius){
+method.setRadius= function(radius){
 	this._radiusFustrum = radius;
 };
 
-method.start(){
+method.start= function(){
 
 }
 
-method.doDecisionAndAction(){
+method.doDecisionAndAction= function(){
 	console.log("prey");
 };
 
