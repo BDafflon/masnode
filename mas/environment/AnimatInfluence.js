@@ -21,4 +21,5 @@ method.getBody=fuction(){
 	return this._body;
 }
 
+
 module.exports = AnimatInfluence;

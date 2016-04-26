@@ -1,4 +1,4 @@
-
+var Vector2D = require('../../utils/geometry/Vector2D.js');
 var method = Body.prototype;
 
 
@@ -10,6 +10,7 @@ function Body(mass, speed, acceleration, location, type) {
     this._location = location
     
     this._PerceptionType = type;
+    this._linearMove = new Vector2D;
 }
 
 
@@ -53,4 +54,32 @@ method.setMaxSpeed = function(speed) {
 };
 
 
+method.computeSteeringMove = function(influence, tic){
+
+}
+
+method.computeSteeringRotation = function(influence, tic){
+
+}
+
+method.move = function(vector, tic){
+    if (tic>0) {
+            this._linearMove.set(vector.getX(), vector.getY());
+            var distance = this.linearMove.length();
+
+            if (distance>0) {
+                this._linearMove.normalize();
+                this._linearMove.scale(distance/tic);
+            }
+        }
+        else {
+            this.linearMove.set(0,0);
+        }
+        this._location.setX(this._location.getX()+vector.getX());
+        this._location.setY(this._location.getY()+vector.getY());
+}
+
+method.rotate = function(angle, tic){
+
+}
 module.exports = Body;
