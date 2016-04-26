@@ -1,6 +1,8 @@
 
 var ArrayList = require('Arraylist');
 var PerceptionData = require('PerceptionData.js');
+var Vector2D = require('../../utils/geometry/Vector2D.js');
+var AnimatAction = require('./AnimatAction.js');
 
 var method = WorldModel.prototype;
 
@@ -67,7 +69,40 @@ method.perceive= function(agent){
 };
 
 
-method.applyInfluences= function(){
+method.applyInfluences= function(tic){
+	var influenceList = new Arraylist;
+	var action = new Arraylist;
+
+	influenceList.add(this._influences);
+
+	for(var i=0 ;i<influenceList.length; i++){
+		var currentInfluence = influenceList.get(i);
+		var body = currentInfluence.getBody();
+
+		if(body != null){
+			var move = new Vector2D;
+			var rotation = 0.;
+
+			move = body.computeSteeringMove(currentInfluence, tic);
+			rotation = body.computeSteeringRotation(currentInfluence, tic);
+
+			var currentAction = new AnimatAction(body, move, rotation);
+			action.add(currentAction);
+
+		}
+	}
+
+
+	for(var i=0 ;i<action.length; i++){
+		var body = action.get(i).getObjectToMove();
+		if(body != null){
+			body.move(action.get(i).getTranslation(), tic);
+			body.rotate(action.get(i).getRotation(), tic);
+		}
+
+	}
+
+	console.log("World updated");
 
 }
 

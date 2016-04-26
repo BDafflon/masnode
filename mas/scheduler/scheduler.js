@@ -35,10 +35,10 @@ method.run = function(){
 		console.log(agents.get(i).getName());
 
 		agents.get(i).setPerciveObject(this._worldModel.perceive(agents.get(i)));
-		//this._worldModel.getInfluences().add(a.doDecisionAndAction());
+		this._worldModel.getInfluences().add(a.doDecisionAndAction());
 	}
 
-	this._worldModel.applyInfluences();
+	this._worldModel.applyInfluences(this._simulationTime.getTic);
 }
 
 module.exports = Scheduler;
