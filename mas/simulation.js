@@ -3,7 +3,6 @@ var Body = require('./environment/Body.js');
 var WorldModel = require('./environment/WorldModel.js');
 var Agent = require('./agent/Agent.js');
 var Prey = require('./agent/PreyAgent.js');
-
 var Scheduler = require('./scheduler/Scheduler.js');
 var typeOf = require('typeof');
 var Vector2D = require('../utils/geometry/Vector2D.js');
@@ -29,7 +28,7 @@ function Simulation() {
  
 	} 
 
-	//this._scheduler.start();
+	this._scheduler.start();
 
 
 }
