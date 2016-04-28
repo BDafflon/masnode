@@ -16,16 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
    canvas.width = width;
    canvas.height = height;
 
-   // register mouse event handlers
-   canvas.onmousedown = function(e){ mouse.click = true; };
-   canvas.onmouseup = function(e){ mouse.click = false; };
-
-   canvas.onmousemove = function(e) {
-      // normalize mouse position to range 0.0 - 1.0
-      mouse.pos.x = e.clientX / width;
-      mouse.pos.y = e.clientY / height;
-      mouse.move = true;
-    };
+    
 
    // draw line received from server
    socket.on('draw_line', function (data) {
@@ -40,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
      
 
-    context.fillStyle = "#FFFFFF";
-    context.fillRect(0, 0, 1000, 1000);
+     
+    context.clearRect(0, 0, 1000, 1000);
   });
 
 
