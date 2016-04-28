@@ -43,15 +43,15 @@ method.normalize = function(){
 		this._x = 1;
 		this._y = 0;
 	} else {
-		this.divide(Vector2D(length, length));
+		this.divide(new Vector2D(length, length));
 	}
 	return this;
 }
 
 
-method.divide = function(){
-	this._x /= vector._x;
-	this._y /= vector._y;
+method.divide = function(vector){
+	this._x /= vector.getX();
+	this._y /= vector.getY;
 	return this;
 }
 

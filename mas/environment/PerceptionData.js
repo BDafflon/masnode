@@ -12,7 +12,7 @@ method.getType=function(){
 }
 
 method.getLocation = function(){
-	return location;
+	return this._location;
 }
 
 module.exports = PerceptionData;

@@ -47,8 +47,6 @@ method.onObjectRemoved = function(object){
 
 method.perceive= function(agent){
 
-	console.log(typeOf(agent));
-
 	var currentAgent = agent;
 	var perceptionList = new ArrayList;
 
@@ -84,7 +82,7 @@ method.applyInfluences= function(tic){
 
 	for(var i=0 ;i<this._influences.length; i++){
 		var currentInfluence = this._influences.get(i);
-		console.log(currentInfluence);
+		
 		var body = currentInfluence.getBody();
 
 		if(body != null){
@@ -110,10 +108,24 @@ method.applyInfluences= function(tic){
 
 	}
 
-	console.log("World updated");
+	//console.log("World updated");
 
 }
 
+method.getStat= function(){
+	var data = new ArrayList;
+
+	for (var j = 0; j < this._agents.length; j++) {
+		var location = this._agents.get(j).getBody().getLocation();
+
+		var type = this._agents.get(j).getBody().getPerceptionType();
+
+		var perception = new PerceptionData(location, type);
+		data.add(perception);
+	}
+
+	return data;
+}
 
 
 module.exports = WorldModel;

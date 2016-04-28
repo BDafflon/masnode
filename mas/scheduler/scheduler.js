@@ -34,17 +34,20 @@ method.run = function(){
 	for(var i = 0 ; i <  agents.length; i++){
 
 		 
-		console.log(agents.get(i).getName());
+		//console.log(agents.get(i).getName());
 		
 		//agents.get(i).doDecisionAndAction();
 
 
 		agents.get(i).setPerciveObject(this._worldModel.perceive(agents.get(i)));
 		var influence = agents.get(i).doDecisionAndAction();
-		if((!influence == undefined))
+		
+		if(influence != null){
 			this._worldModel.getInfluences().add(influence);
+			}
+		}
  
-	}
+	
 
 	this._worldModel.applyInfluences(this._simulationTime.getTic);
 }

@@ -72,26 +72,26 @@ method.scaleVector = function(vector, length, tic) {
     }
 
 method.computeSteeringMove = function(influence, tic){
-        var m = new Vector2d;
+        var m = new Vector2D;
         
         m.copy(this._linearMove);
-        m.add(linearAcceleration);
+        m.add(influence.getLinear());
         
         var lSpeed = m.length();
 
         if (lSpeed<0) lSpeed = 0.;
         if (lSpeed>this._maxLinearSpeed) lSpeed = this._maxLinearSpeed;
 
-        return this.scaleVector(m, lSpeed, clock);
+        return this.scaleVector(m, lSpeed, tic);
 }
 
 method.computeSteeringRotation = function(influence, tic){
 
-        var speed = this._currentAngularSpeed + tic ; //TODO ->clock.perTimeUnit(angularAcceleration);
+        var speed = this._currentAngularSpeed + (influence.getAngular()/(tic/1000)) ; //TODO ->clock.perTimeUnit(angularAcceleration);
         if (speed<-this._maxAngularSpeed) speed = -this._maxAngularSpeed;
         else if (speed>this._maxAngularSpeed) speed = this._maxAngularSpeed;
 
-        return tic; //T0D0 -> clock.perTimeUnit(speed);
+        return speed; //T0D0 -> clock.perTimeUnit(speed);
 }
 
 method.move = function(vector, tic){
@@ -105,7 +105,7 @@ method.move = function(vector, tic){
             }
         }
         else {
-            this.linearMove.set(0,0);
+            this._linearMove.set(0,0);
         }
         this._location.setX(this._location.getX()+vector.getX());
         this._location.setY(this._location.getY()+vector.getY());

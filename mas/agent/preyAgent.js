@@ -1,5 +1,7 @@
 
 var Agent = require("./Agent.js");
+var AnimatInfluence = require('../environment/AnimatInfluence.js');
+var Vector2D = require('../../utils/geometry/Vector2D.js');
 
 var inherits = function(ctor, superCtor) { // took this right from requrie('util').inherits
   ctor.super_ = superCtor;
@@ -32,7 +34,12 @@ PreyAgent.prototype.createDefaultBody= function(){
 
 PreyAgent.prototype.doDecisionAndAction = function() { // override A's method
     
-    console.log('prey');
+    //console.log('prey');
+    var x = Math.random() -1;
+    var y = Math.random() -1;
+
+    var inf = new AnimatInfluence(new Vector2D(x,y), 0, this._body);
+    return inf;
 };
 
 

@@ -9,7 +9,6 @@ var Vector2D = require('../utils/geometry/Vector2D.js');
 
 var SimulationTimeManager = require('./scheduler/SimulationTimeManager.js');
 
-
 var method = Simulation.prototype;
 
 function Simulation() {
@@ -21,7 +20,18 @@ function Simulation() {
 	for(var i=0 ; i<10;i++){
 
 
-		var b = new Body(1, 1, 0.1, 0.1, new Vector2D(0,0), "prey");
+		var b = new Body(1, 1, 0.1, 0.1, new Vector2D(Math.random() * (500 - 1) + 1,Math.random() * (500 - 1) + 1), "prey");
+		var a = new Prey(b,10);
+		  
+		this._worldModel.onAgentAdded(a);
+
+ 
+	} 
+
+	for(var i=0 ; i<10;i++){
+
+
+		var b = new Body(1, 1, 0.1, 0.1, new Vector2D(Math.random() * (500 - 1) + 1,Math.random() * (500 - 1) + 1), "predator");
 		var a = new Prey(b,10);
 		  
 		this._worldModel.onAgentAdded(a);
@@ -33,4 +43,11 @@ function Simulation() {
 
 
 }
+
+method.getStat = function(){
+	return this._worldModel.getStat();
+}
+
+
+
 module.exports = Simulation;
