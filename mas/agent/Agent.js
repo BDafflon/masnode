@@ -24,8 +24,12 @@ Agent.prototype.setPerciveObject = function(perciveObject) {
 
 
 
-Agent.prototype.setBody = function(body) {
+Agent.prototype.getRadius = function() {
 	return this._radiusFustrum;
+};
+
+Agent.prototype.setRadius= function(radius){
+    this._radiusFustrum = radius;
 };
 
 
@@ -34,9 +38,10 @@ Agent.prototype.setBody = function(body) {
      this._body = body;
 };
 
-Agent.prototype.setRadius= function(radius){
-	this._radiusFustrum = radius;
+Agent.prototype.getBody= function(){
+    return this._body;
 };
+
 
 Agent.prototype.start= function(){
 

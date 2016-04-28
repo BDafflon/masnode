@@ -14,7 +14,7 @@ var inherits = function(ctor, superCtor) { // took this right from requrie('util
 };
 
 var PreyAgent = function(body, radius){
-    PreyAgent.super_.call(this); // call A's constructor
+    PreyAgent.super_.call(this,body,radius); // call A's constructor
      
 };
 
@@ -33,10 +33,6 @@ PreyAgent.prototype.createDefaultBody= function(){
 PreyAgent.prototype.doDecisionAndAction = function() { // override A's method
     
     console.log('prey');
-};
-
-PreyAgent.prototype.uniqueB = function() {
-    console.log('B.uniqueB',this.name);
 };
 
 

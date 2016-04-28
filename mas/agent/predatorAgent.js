@@ -31,9 +31,5 @@ PredatorAgent.prototype.doDecisionAndAction = function() { // override A's metho
     console.log('predator');
 };
 
-PredatorAgent.prototype.uniqueB = function() {
-    console.log('B.uniqueB',this.name);
-};
-
 
 module.exports = PredatorAgent;

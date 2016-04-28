@@ -20,8 +20,9 @@ function Simulation() {
 
 	for(var i=0 ; i<10;i++){
 
- 
-		var a = new Prey(null,10);
+
+		var b = new Body(1, 1, 0.1, 0.1, new Vector2D(0,0), "prey");
+		var a = new Prey(b,10);
 		  
 		this._worldModel.onAgentAdded(a);
 

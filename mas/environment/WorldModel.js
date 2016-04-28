@@ -47,11 +47,14 @@ method.onObjectRemoved = function(object){
 
 method.perceive= function(agent){
 
+	console.log(typeOf(agent));
+
 	var currentAgent = agent;
 	var perceptionList = new ArrayList;
 
 	for (var j = 0; j < this._agents.length; j++) {
 		if(this._agents.get(j).getName()!=agent.getName()){
+
 			var currentLocation = agent.getBody().getLocation();
 
 			var location = this._agents.get(j).getBody().getLocation();
