@@ -49,7 +49,7 @@ method.run = function(){
  
 	
 
-	this._worldModel.applyInfluences(this._simulationTime.getTic);
+	this._worldModel.applyInfluences(this._simulationTime.getTic());
 }
 
 module.exports = Scheduler;

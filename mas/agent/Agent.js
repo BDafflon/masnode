@@ -45,7 +45,7 @@ Agent.prototype.getBody= function(){
 
 Agent.prototype.start= function(){
 
-}
+};
 
 Agent.prototype.doDecisionAndAction = function() {
     console.log('agent');

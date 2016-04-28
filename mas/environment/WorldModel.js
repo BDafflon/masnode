@@ -75,7 +75,7 @@ method.perceive= function(agent){
 
 
 method.applyInfluences= function(tic){
-	var influenceList = new ArrayList;
+	 
 	var action = new ArrayList;
 
 	 
@@ -84,13 +84,16 @@ method.applyInfluences= function(tic){
 		var currentInfluence = this._influences.get(i);
 		
 		var body = currentInfluence.getBody();
-
+ 
 		if(body != null){
 			var move = new Vector2D;
 			var rotation = 0.;
 
-			move = body.computeSteeringMove(currentInfluence, tic);
-			rotation = body.computeSteeringRotation(currentInfluence, tic);
+			 
+			move = body.computeKinematicMove(currentInfluence, tic);
+			rotation = body.computeKinematicRotation(currentInfluence, tic);
+ 			
+			 
 
 			var currentAction = new AnimatAction(body, move, rotation);
 			action.add(currentAction);
@@ -101,13 +104,29 @@ method.applyInfluences= function(tic){
 
 	for(var i=0 ;i<action.length; i++){
 		var body = action.get(i).getObjectToMove();
+
 		if(body != null){
+ 
 			body.move(action.get(i).getTranslation(), tic);
 			body.rotate(action.get(i).getRotation(), tic);
+
+
+			if(body.getLocation().getX()<0)
+				body.getLocation().setX(0);
+			if(body.getLocation().getX()>this._width)
+				body.getLocation().setX(this._width);
+
+			if(body.getLocation().getY()<0)
+				body.getLocation().setY(0);
+			if(body.getLocation().getY()>this._height)
+				body.getLocation().setY(this._height);
+
+
 		}
 
 	}
 
+	this._influences = new ArrayList;
 	//console.log("World updated");
 
 }
@@ -116,6 +135,7 @@ method.getStat= function(){
 	var data = new ArrayList;
 
 	for (var j = 0; j < this._agents.length; j++) {
+
 		var location = this._agents.get(j).getBody().getLocation();
 
 		var type = this._agents.get(j).getBody().getPerceptionType();

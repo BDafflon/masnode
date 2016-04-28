@@ -35,8 +35,10 @@ PreyAgent.prototype.createDefaultBody= function(){
 PreyAgent.prototype.doDecisionAndAction = function() { // override A's method
     
     //console.log('prey');
-    var x = Math.random() -1;
-    var y = Math.random() -1;
+    var x =10* (Math.random() -0.5);
+    var y = 10* (Math.random() -0.5);
+
+    
 
     var inf = new AnimatInfluence(new Vector2D(x,y), 0, this._body);
     return inf;

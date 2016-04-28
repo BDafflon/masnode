@@ -23,8 +23,10 @@ io.on('connection', function (socket) {
    var data = simu.getStat();
    
    io.emit('clean');
+
    for(var i = 0 ; i < data.length; i++){
-   	console.log('draw_circle' +  i +' '+data.length);
+
+   		 
    		var d = {x:data.get(i).getLocation().getX(), y:data.get(i).getLocation().getY(), type:data.get(i).getType()}
    		
    		io.emit('draw_agent', {agent: d});
@@ -33,7 +35,7 @@ io.on('connection', function (socket) {
    
  
  	
-}, 1000);
+}, 100);
 
    
    

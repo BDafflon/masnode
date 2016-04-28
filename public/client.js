@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", function() {
    
    socket.on('clean', function(){
 
-    console.log('clean');
+     
 
     context.fillStyle = "#FFFFFF";
-    context.fillRect(0, 0, 500, 500);
+    context.fillRect(0, 0, 1000, 1000);
   });
 
 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     centerX =data.agent.x + 250;
     centerY =data.agent.y + 250;
-
+    console.log(centerX+" : "+centerY);
     
 
     type = data.agent.type;
