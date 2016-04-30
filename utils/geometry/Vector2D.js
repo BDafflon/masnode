@@ -36,6 +36,10 @@ method.length = function(){
 	return Math.sqrt((this._x*this._x)+(this._y*this._y));
 }
 
+method.lengthSquared = function(){
+	return this.length()*this.length();
+}
+
 method.normalize2D = function(){
 	var length = this.length();
 

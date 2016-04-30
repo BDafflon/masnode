@@ -14,7 +14,7 @@ var method = Simulation.prototype;
 
 function Simulation() {
 
-	this._worldModel = new WorldModel(500,500);
+	this._worldModel = new WorldModel(800,800);
 	var tic = new SimulationTimeManager(100);
 	this._scheduler = new Scheduler(this._worldModel,tic);
 
