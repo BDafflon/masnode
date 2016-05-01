@@ -18,11 +18,11 @@ function Simulation() {
 	var tic = new SimulationTimeManager(100);
 	this._scheduler = new Scheduler(this._worldModel,tic);
 
-	for(var i=0 ; i<1;i++){
+	for(var i=0 ; i<10;i++){
 
 
-		var b = new Body(1, 200, 1, 1, new Vector2D(300,300), "prey");
-		var a = new Prey(b,200);
+		var b = new Body(1, 100, 1, 1, new Vector2D(300,300), "prey");
+		var a = new Prey(b,100);
 		  
 		this._worldModel.onAgentAdded(a);
 

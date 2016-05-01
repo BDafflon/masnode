@@ -33,8 +33,8 @@ PredatorAgent.prototype.doDecisionAndAction = function() { // override A's metho
     
     //console.log('predator');
 
-      var x = 0;//20* (Math.random() -0.5);
-    var y =0;// 20* (Math.random() -0.5);
+      var x = 20* (Math.random() -0.5);
+    var y = 20* (Math.random() -0.5);
 
     
 
