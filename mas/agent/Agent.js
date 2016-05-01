@@ -6,7 +6,7 @@ var Body = require('../environment/Body.js');
 var Agent = function(body, radius) {
     
      this._body = body;
-     this._radius = radius;
+     this._radiusFustrum = radius;
      this._id=randomstring.generate(20);
      this._perciveObject = ArrayList;
 };

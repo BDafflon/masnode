@@ -41,15 +41,17 @@ method.lengthSquared = function(){
 }
 
 method.normalize2D = function(){
+
 	var length = this.length();
 
 	if (length == 0) {
 		this._x = 1;
 		this._y = 0;
 	} else {
-		this.divide(new Vector2D(length, length));
+		this._x /= length;
+		this._y /= length;
 	}
-	return this;
+	 
 }
 
 

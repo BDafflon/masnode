@@ -47,6 +47,7 @@ method.onObjectRemoved = function(object){
 
 method.perceive= function(agent){
 
+ 
 	var currentAgent = agent;
 	var perceptionList = new ArrayList;
 
@@ -57,6 +58,7 @@ method.perceive= function(agent){
 
 			var location = this._agents.get(j).getBody().getLocation();
 			var type = this._agents.get(j).getBody().getPerceptionType();
+
 
 			var distance = Math.sqrt(  (location.getX() - currentLocation.getX())*(location.getX() - currentLocation.getX()) +
 				(location.getY() - currentLocation.getY())*(location.getY() - currentLocation.getY())
