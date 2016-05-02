@@ -57,7 +57,7 @@ PreyAgent.prototype.doDecisionAndAction = function() { // override A's method
   if(force.length!=0){
 
 
-    console.log("tmp 4 "+force.getX()+ " " +force.getY())
+     
 
     if(force.length>this._maxforce){
       force.normalize2D();
@@ -98,7 +98,7 @@ PreyAgent.prototype.separation = function(predators){
       p.normalize2D();
     }
 
-    console.log("tmp 3 "+p.getX()+ " " +p.getY());
+     
     return p;   
   }
 

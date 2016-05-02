@@ -1,15 +1,21 @@
 
 var agents= {};
 var agents2={};
+var perception={};
+var perceptionUpdated=0;
 
 document.addEventListener("DOMContentLoaded", function() {
- 
+  
+  run();
+  doDecision(null);
    // get canvas element and create context
    var canvas  = document.getElementById('drawing');
    var context = canvas.getContext('2d');
    var width   = window.innerWidth;
    var height  = window.innerHeight;
    var socket  = io.connect();
+   
+    var socket2 = io.connect('http://localhost:8081');
    var canvasWidth = 800;
    var canvasHeight = 800;
    
@@ -19,13 +25,20 @@ document.addEventListener("DOMContentLoaded", function() {
    var update =0;
    // set canvas to full browser width/height
    
+   socket.on('setPerception', function(data){
+      perception = data.perception;
+      perceptionUpdated=1;
+
+   });
+
+
    socket.on('draw_agent', function (data) {
 
     id = data.agent.id;
 
     x =data.agent.x ;
     y =data.agent.y ;
-    console.log(x);
+    
     type = data.agent.type;
 
     var d={x:x,y:y,t:type};
@@ -41,6 +54,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   });
 
+    
+    
+ 
+
  
 var requestAnimationFrame = window.requestAnimationFrame || 
                             window.mozRequestAnimationFrame || 
@@ -52,6 +69,14 @@ function init(){
 }
 
 function draw() {
+
+  if(perceptionUpdated==1){
+    d=doDecision(perception);
+    perceptionUpdated=0;
+   
+    socket2.emit('message', {influence: d});
+  }
+
    context.clearRect(0, 0, canvasWidth, canvasHeight);
 // color in the background
     context.fillStyle = "#EEEEEE";
@@ -80,6 +105,8 @@ function drawAgent(agent){
       context.fillStyle = "#00CC00";
     if(agent['t']=="predator")
       context.fillStyle = "#CC0000";
+    if(agent['t']=="RemoteAgent")
+      context.fillStyle = "#0000FF";
     context.fill();
 }
 

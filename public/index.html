@@ -6,8 +6,49 @@
       <link rel="stylesheet" href="style.css" />
       <script src="socket.io/socket.io.js"></script>
       <script src="client.js"></script>
+      <script type="text/javascript">
+   function run() {
+    var el = document.getElementById('cnsl');
+    
+    var scriptText = el.textContent ;
+   
+    var oldScript = document.getElementById('scriptContainer');
+    var newScript;
+
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    newScript = document.createElement('script');
+    newScript.id = 'scriptContainer';
+    newScript.text = el.textContent ;
+    document.body.appendChild(newScript);
+} 
+</script>
+
    </head>
    <body>
-      <canvas id="drawing" width="800" height="800"></canvas>
+   <table>
+   <tr>
+      <td>
+      <canvas id="drawing" width="800px" height="800px"></canvas>
+      </td>
+      <td>
+      comportement des predateurs: 
+      <pre id="cnsl" rows="30" cols="40" contenteditable="true" >
+function doDecision(perceptions){
+//perceptions = {id:{x:positionX,y:positionY,t:type}}
+
+ 
+
+
+influence = {x:0,y:0}
+return influence;
+}  
+      </pre>
+      <button onclick="run()"> run </button>
+      </td>
+</tr>
+</table>
    </body>
 </html>

@@ -3,6 +3,8 @@ var Body = require('./environment/Body.js');
 var WorldModel = require('./environment/WorldModel.js');
 var Agent = require('./agent/Agent.js');
 var Prey = require('./agent/PreyAgent.js');
+var RemoteAgent = require('./agent/RemoteAgent.js');
+
 var Predator = require('./agent/predatorAgent.js');
 var Scheduler = require('./scheduler/Scheduler.js');
 var typeOf = require('typeof');
@@ -12,17 +14,17 @@ var SimulationTimeManager = require('./scheduler/SimulationTimeManager.js');
 
 var method = Simulation.prototype;
 
-function Simulation() {
+function Simulation(io) {
 
 	this._worldModel = new WorldModel(800,800);
 	var tic = new SimulationTimeManager(100);
 	this._scheduler = new Scheduler(this._worldModel,tic);
 
-	for(var i=0 ; i<10;i++){
+	for(var i=0 ; i<1;i++){
 
 
-		var b = new Body(1, 100, 1, 1, new Vector2D(300,300), "prey");
-		var a = new Prey(b,100);
+		var b = new Body(1, 100, 1, 1, new Vector2D(300,300), "RemoteAgent");
+		var a = new RemoteAgent(b,100,io);
 		  
 		this._worldModel.onAgentAdded(a);
 
