@@ -21,7 +21,11 @@ var PredatorAgent = function(body, radius) {
      
 };
 
-
+function PredatorAgent(body, radius){
+ Agent.call(this, body, radius);
+//if(body==null)
+//  this.createDefaultBody();
+}
 
 inherits(PredatorAgent,Agent); // B now inherits/extends A
 

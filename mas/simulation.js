@@ -20,18 +20,18 @@ function Simulation(io) {
 	var tic = new SimulationTimeManager(100);
 	this._scheduler = new Scheduler(this._worldModel,tic);
 
-	for(var i=0 ; i<10;i++){
+	for(var i=0 ; i<1;i++){
 
 
-		var b = new Body(1, 100, 1, 1, new Vector2D(300,300), "prey");
-		var a = new Prey(b,100,io);
+		var b = new Body(1, 1000000, 1, 1, new Vector2D(300,300), "RemoteAgent");
+		var a = new RemoteAgent(b,100,io);
 		  
 		this._worldModel.onAgentAdded(a);
 
  
 	} 
 
-	for(var i=0 ; i<10;i++){
+	for(var i=0 ; i<1;i++){
 
 
 		var b = new Body(1, 10, 1, 1, new Vector2D(250,250), "predator");

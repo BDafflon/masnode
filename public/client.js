@@ -4,6 +4,17 @@ var agents2={};
 var perception={};
 var perceptionUpdated=0;
 
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 10; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   
   run();
@@ -25,9 +36,17 @@ document.addEventListener("DOMContentLoaded", function() {
    var update =0;
    // set canvas to full browser width/height
    
-   socket.on('setPerception', function(data){
-      perception = data.perception;
-      perceptionUpdated=1;
+   socket2.on('setPerception', function(data){
+      perception = data;
+
+
+      for(var agent  in perception){
+          console.log(perception[agent]);
+      }
+
+      
+
+      perceptionUpdated=0;
 
    });
 
@@ -70,8 +89,12 @@ function init(){
 
 function draw() {
 
+  var token = makeid();
+  socket2.emit('getPerception', {token:token});
+
+  d=doDecision(perception);
   if(perceptionUpdated==1){
-    d=doDecision(perception);
+    
     perceptionUpdated=0;
    
     socket2.emit('message', {influence: d});
