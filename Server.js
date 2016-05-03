@@ -3,7 +3,7 @@ var express = require('express'),
     http = require('http'),
     socketIo = require('socket.io');
 
-var SimulationSMA = require('./mas/Simulation.js');
+var SimulationSMA = require('./mas/simulation.js');
 // start webserver on port 8080
 var server =  http.createServer(app);
 var io = socketIo.listen(server);
