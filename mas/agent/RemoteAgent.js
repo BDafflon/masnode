@@ -3,10 +3,7 @@ var AnimatInfluence = require('../environment/AnimatInfluence.js');
 var Vector2D = require('../../utils/geometry/Vector2D.js');
 var ArrayList = require('Arraylist');
 var typeOf = require('typeof');
-var express = require('express'),
-    app = express(),
-    http = require('http'),
-    socketIo = require('socket.io');
+
 
 
 var inherits = function(ctor, superCtor) { // took this right from requrie('util').inherits
@@ -21,13 +18,11 @@ var inherits = function(ctor, superCtor) { // took this right from requrie('util
     });
 };
 
-var RemoteAgent = function(body, radius, io) {
+var RemoteAgent = function(body, radius, remote) {
     RemoteAgent.super_.call(this, body, radius); // call A's constructor
     this._maxforce = 10;
-    this._server = http.createServer(app);
-    this._io = require('socket.io').listen(this._server);
-    this._server.listen(8081);
-    this.createRemote(this._io);
+    this._remote = remote;
+    this.createRemote();
     this._remoteInfluence = new Vector2D;
     this._remoteInfluence.set(0, 0);
 };
@@ -43,26 +38,38 @@ inherits(RemoteAgent, Agent); // B now inherits/extends A
 
 RemoteAgent.prototype.createDefaultBody = function() {};
 
-RemoteAgent.prototype.createRemote = function(io) {
+RemoteAgent.prototype.createRemote = function() {
 
+  
 
     
 };
 
 RemoteAgent.prototype.doDecisionAndAction = function() { // override A's method
+    
+  var i = new Vector2D;
+  if(this._remote != undefined){
 
+    this._remote.setPerception(this.getName(), this._perciveObject);
 
-  //Connexion serveur
-  
+    var a = this._remote.getIndluence(this.getName());
 
+     i.set(a.getX(), a.getY());
+     
 
-    var i = new Vector2D;
-    i.set(this._remoteInfluence.getX(), this._remoteInfluence.getY());
+  }
+  else{
+    console.log("undefined remote");
+  }
+
+   
+   
 
 
 
     var inf = new AnimatInfluence(new Vector2D(i.getX(), i.getY()), 0, this._body);
-    this._remoteInfluence.set(0, 0);
+   // console.log("influence "+i.getX()+" "+ i.getY());
+    
     return inf; //new AnimatInfluence(new Vector2D(0,0), 0, this._body);
 };
 

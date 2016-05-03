@@ -7,7 +7,7 @@ var Agent = function(body, radius) {
     
      this._body = body;
      this._radiusFustrum = radius;
-     this._id=randomstring.generate(20);
+     this._id=randomstring.generate(25);
      this._perciveObject = new ArrayList;
 };
 

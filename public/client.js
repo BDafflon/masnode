@@ -4,6 +4,8 @@ var agents2={};
 var perception={};
 var perceptionUpdated=0;
 
+ 
+
 function makeid()
 {
     var text = "";
@@ -18,7 +20,7 @@ function makeid()
 document.addEventListener("DOMContentLoaded", function() {
   
   run();
-  doDecision(null);
+  doDecision([]);
    // get canvas element and create context
    var canvas  = document.getElementById('drawing');
    var context = canvas.getContext('2d');
@@ -26,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
    var height  = window.innerHeight;
    var socket  = io.connect();
    
-    var socket2 = io.connect('http://localhost:8081');
+   var socket2 = io.connect('http://localhost:8081');
    var canvasWidth = 800;
    var canvasHeight = 800;
    
@@ -36,19 +38,27 @@ document.addEventListener("DOMContentLoaded", function() {
    var update =0;
    // set canvas to full browser width/height
    
-   socket2.on('setPerception', function(data){
-      perception = data;
+ 
+  var s = socket2;
+
+  socket2.on('setPerception', function(data){
+      var perceptions = data.perception;
+      var id=data.id;
+
+       
+      d={};
+ 
+      d=doDecision(perceptions);
+
+     
+
+      s.emit('setInfluence2D', {id: id, influence: d});
+
+    });
 
 
-      for(var agent  in perception){
-          console.log(perception[agent]);
-      }
+ 
 
-      
-
-      perceptionUpdated=0;
-
-   });
 
 
    socket.on('draw_agent', function (data) {
@@ -73,10 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   });
 
-    
-    
- 
-
  
 var requestAnimationFrame = window.requestAnimationFrame || 
                             window.mozRequestAnimationFrame || 
@@ -89,16 +95,10 @@ function init(){
 
 function draw() {
 
-  var token = makeid();
-  socket2.emit('getPerception', {token:token});
-
-  d=doDecision(perception);
-  if(perceptionUpdated==1){
-    
-    perceptionUpdated=0;
    
-    socket2.emit('message', {influence: d});
-  }
+   
+
+  
 
    context.clearRect(0, 0, canvasWidth, canvasHeight);
 // color in the background

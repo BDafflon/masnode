@@ -12,7 +12,7 @@ server.listen(8080);
 app.use(express.static(__dirname + '/public'));
 console.log("Server running on 127.0.0.1:8080");
 
-var simu = new SimulationSMA(io);
+var simu = new SimulationSMA();
 
 
 // event-handler for new incoming connections
