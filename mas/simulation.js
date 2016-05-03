@@ -36,15 +36,27 @@ function Simulation() {
 
 	this._dataReader.createRemote();
 
-	for(var i=0 ; i<2;i++){
+	for(var i=0 ; i<10;i++){
 
-		
-		var b = new Body(1, 1000000, 1, 1, new Vector2D(Math.random() * (200 - 1) + 1,Math.random() * (200 - 1) + 1), "RemoteAgent");
+		var type = "predator";
+		var b = new Body(1, 1000000, 1, 1, new Vector2D(Math.random() * (200 - 1) + 1,Math.random() * (200 - 1) + 1), type);
 		var a = new RemoteAgent(b,100, this._dataReader);
 		  
 		this._worldModel.onAgentAdded(a);
-		RemoteAgentList.add(a);
-		this._dataReader.addListener(a.getName());
+		 
+		this._dataReader.addListener(a.getName(),type);
+ 
+	} 
+
+	for(var i=0 ; i<10;i++){
+
+		var type = "prey";
+		var b = new Body(1, 1000000, 1, 1, new Vector2D(Math.random() * (200 - 1) + 1,Math.random() * (200 - 1) + 1), type);
+		var a = new RemoteAgent(b,100, this._dataReader);
+		  
+		this._worldModel.onAgentAdded(a);
+		 
+		this._dataReader.addListener(a.getName(),type);
  
 	} 
 
@@ -55,7 +67,7 @@ function Simulation() {
 	// Predator
 
 
-	for(var i=0 ; i<1;i++){
+	for(var i=0 ; i<0;i++){
 
 
 		var b = new Body(1, 10, 1, 1, new Vector2D(250,250), "predator");
@@ -70,7 +82,7 @@ function Simulation() {
 	// Prey
 
 	
-	for(var i=0 ; i<1;i++){
+	for(var i=0 ; i<0;i++){
 
 
 		var b = new Body(1, 10, 1, 1, new Vector2D(250,250), "prey");

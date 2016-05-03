@@ -7,23 +7,10 @@
       <script src="socket.io/socket.io.js"></script>
       <script src="client.js"></script>
       <script type="text/javascript">
-   function run() {
-    var el = document.getElementById('cnsl');
-    
-    var scriptText = el.textContent ;
+
+    var listComportement = {};
+
    
-    var oldScript = document.getElementById('scriptContainer');
-    var newScript;
-
-    if (oldScript) {
-      oldScript.parentNode.removeChild(oldScript);
-    }
-
-    newScript = document.createElement('script');
-    newScript.id = 'scriptContainer';
-    newScript.text = el.textContent ;
-    document.body.appendChild(newScript);
-} 
 </script>
 
    </head>
@@ -35,6 +22,11 @@
       </td>
       <td>
       comportement des predateurs (bleu): 
+      <form id="listes">
+        <select id='idList' onchange="updateComportement(this.value)" onfocus="focusComportement(this.value)">
+          
+        </select>
+      </form> 
       <pre id="cnsl" rows="30" cols="40" contenteditable="true" >
 function doDecision(perceptions){
 //perceptions = [{x:positionX,y:positionY,t:type}]

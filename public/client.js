@@ -4,22 +4,56 @@ var agents2={};
 var perception={};
 var perceptionUpdated=0;
 
+var defaultComportement = "function doDecision(perceptions){ \n //perceptions = [{x:positionX,y:positionY,t:type} \n var x = (Math.random() -0.5) * 5; \n var y = (Math.random() -0.5) * 5; \n influence = {x:x,y:y}; \n return influence;\n}\n";
  
+ function run(comportement) {
+  //alert(comportement);
+    var el = document.getElementById('cnsl');
+    
 
-function makeid()
+    var scriptText = comportement;
+   
+    var oldScript = document.getElementById('scriptContainer');
+    var newScript;
+
+    if (oldScript) {
+      oldScript.parentNode.removeChild(oldScript);
+    }
+
+    newScript = document.createElement('script');
+    newScript.id = 'scriptContainer';
+    newScript.text = comportement ;
+    document.body.appendChild(newScript);
+
+  
+} 
+  
+function focusComportement(val){
+
+  listComportement[val].comportement=document.getElementById('cnsl').textContent;
+
+}
+function updateComportement(val){
+   
+  document.getElementById('cnsl').textContent= listComportement[val].comportement;
+
+}
+
+function addInList(type)
 {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  //console.log("type "+listComportement[type].comportement);
 
-    for( var i=0; i < 10; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+  if(listComportement[type]==undefined){
 
-    return text;
+    var List = document.getElementById("idList");
+    List.options.add(new Option("agent : "+type, type, false, false));
+    listComportement[type]={comportement:defaultComportement};
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   
-  run();
+  run(defaultComportement);
   doDecision([]);
    // get canvas element and create context
    var canvas  = document.getElementById('drawing');
@@ -41,13 +75,19 @@ document.addEventListener("DOMContentLoaded", function() {
  
   var s = socket2;
 
+  socket2.on('addTypeAgent', function(data){
+  
+    console.log("add type : "+data.type);
+    addInList(data.type);
+  });
+
   socket2.on('setPerception', function(data){
       var perceptions = data.perception;
       var id=data.id;
 
        
       d={};
- 
+      run(listComportement[data.type].comportement);
       d=doDecision(perceptions);
 
      
