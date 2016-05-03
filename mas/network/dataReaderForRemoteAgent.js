@@ -48,7 +48,7 @@ method.getIndluence = function(id){
 
 }
 
-method.setPerception= function(id, perception){
+method.setPerception= function(id, perception,type){
 
 	var p=[];
 
@@ -56,7 +56,7 @@ method.setPerception= function(id, perception){
 		p.push({x:perception[i].getLocation().getX(), y:perception[i].getLocation().getY(), t:perception[i].getType()});
 	}
 
-	this._io.emit('setPerception', {id:id, perception:p});
+	this._io.emit('setPerception', {id:id, type:type, perception:p});
 }
 
 method.addListener = function(id){
