@@ -50,7 +50,7 @@ RemoteAgent.prototype.doDecisionAndAction = function() { // override A's method
   var i = new Vector2D;
   if(this._remote != undefined){
 
-    this._remote.setPerception(this.getName(), this._perciveObject);
+    this._remote.setPerception(this.getName(), this._perciveObject, this._body._PerceptionType);
 
     var a = this._remote.getIndluence(this.getName());
 
