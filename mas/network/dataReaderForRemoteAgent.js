@@ -28,11 +28,16 @@ method.createRemote = function(){
 		
 		console.log("connextion ");
 
+		for(var a in self._remoteAgent){
+			console.log("addListener "+self._remoteAgent[a].type)
+			self._io.emit('addTypeAgent',{type:self._remoteAgent[a].type});
+		}
+
 		 
 
 		socket.on('setInfluence2D', function(data){
 			//console.log("setDecision "+data.influence.x);
-			self._remoteAgent[data.id] = data.influence;
+			self._remoteAgent[data.id] = {x:data.influence.x,y:data.influence.y,type:self._remoteAgent[data.id].type};
 		});
 		
 
@@ -59,11 +64,11 @@ method.setPerception= function(id, perception,type){
 	this._io.emit('setPerception', {id:id, type:type, perception:p});
 }
 
-method.addListener = function(id){
+method.addListener = function(id,t){
 	
-	// {2:{x:0,y:0},3:{x:3,y:4}}
+	// {2:{x:0,y:0},3:{x:3,y:4, type:t}}
 	 
-	this._remoteAgent[id]={x:0,y:0};
+	this._remoteAgent[id]={x:0,y:0,type:t};
 	console.log("preparation addListener network "+id);
 
 }
