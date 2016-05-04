@@ -30,12 +30,12 @@ var defaultComportement = "function doDecision(perceptions){ \n //perceptions = 
   
 function focusComportement(val){
 
-  listComportement[val].comportement=document.getElementById('cnsl').textContent;
+  listComportement[val].comportement=document.getElementById('cnsl').innerHTML;
 
 }
 function updateComportement(val){
    
-  document.getElementById('cnsl').textContent= listComportement[val].comportement;
+  document.getElementById('cnsl').innerHTML = listComportement[val].comportement;
 
 }
 
