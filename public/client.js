@@ -28,8 +28,17 @@ var defaultComportement = "function doDecision(perceptions){ \n //perceptions = 
   
 } 
   
-function focusComportement(val){
+function runComportement(){
 
+var e = document.getElementById("idList").value;
+var val = e;
+ 
+  focusComportement(val);
+
+}
+
+function focusComportement(val){
+ 
   listComportement[val].comportement=document.getElementById('cnsl').innerHTML;
 
 }
